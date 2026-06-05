@@ -146,6 +146,17 @@ st.plotly_chart(fig_year, use_container_width=True)
 # TOP REVISTAS
 # --------------------------------------------------
 
+col1, col2 = st.columns(2)
+
+top_sources = (
+    filtered_df["Source title"]
+    .value_counts()
+    .head(5)
+    .reset_index()
+)
+
+top_sources.columns = ["Revista", "Cantidad"]
+
 fig_sources = px.bar(
     top_sources,
     x="Revista",
@@ -168,7 +179,6 @@ col1.plotly_chart(
     fig_sources,
     use_container_width=True
 )
-
 
 # --------------------------------------------------
 # TOP AUTORES
