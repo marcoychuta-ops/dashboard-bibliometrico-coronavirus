@@ -130,6 +130,7 @@ pub_year = (
     filtered_df.groupby("Year")
     .size()
     .reset_index(name="Publicaciones")
+    .sort_values("Year")
 )
 
 fig_year = px.line(
@@ -141,25 +142,55 @@ fig_year = px.line(
 )
 
 fig_year.update_traces(
-    line=dict(width=5),
-    marker=dict(size=10)
-)
-
-fig_year.update_layout(
-    height=500,
-    title_font=dict(size=36),
-    xaxis=dict(
-        title_font=dict(size=36),
-        tickfont=dict(size=32)
+    line=dict(
+        color="#FF4B4B",
+        width=6
     ),
-    yaxis=dict(
-        title_font=dict(size=36),
-        tickfont=dict(size=32)
+    marker=dict(
+        size=14,
+        color="#FF4B4B",
+        line=dict(
+            color="white",
+            width=2
+        )
     )
 )
 
-st.plotly_chart(fig_year, use_container_width=True)
+fig_year.update_layout(
+    height=600,
 
+    title=dict(
+        text="📈 Publicaciones por Año",
+        x=0.5,
+        font=dict(size=36)
+    ),
+
+    xaxis=dict(
+        title="Año",
+        title_font=dict(size=24),
+        tickfont=dict(size=18),
+        showgrid=True,
+        gridcolor="rgba(255,255,255,0.1)"
+    ),
+
+    yaxis=dict(
+        title="N° de Publicaciones",
+        title_font=dict(size=24),
+        tickfont=dict(size=18),
+        showgrid=True,
+        gridcolor="rgba(255,255,255,0.1)"
+    ),
+
+    plot_bgcolor="rgba(0,0,0,0)",
+    paper_bgcolor="rgba(0,0,0,0)",
+
+    hovermode="x unified"
+)
+
+st.plotly_chart(
+    fig_year,
+    use_container_width=True
+)
 # --------------------------------------------------
 # TOP REVISTAS
 # --------------------------------------------------
