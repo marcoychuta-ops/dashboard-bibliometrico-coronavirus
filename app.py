@@ -109,20 +109,109 @@ st.markdown("### Coronavirus Detection Research")
 # KPIs
 # --------------------------------------------------
 
+# =========================
+# KPIs
+# =========================
+
 total_publicaciones = len(filtered_df)
 total_revistas = filtered_df["Source title"].nunique()
 total_citas = filtered_df["Cited by"].sum()
 promedio_citas = filtered_df["Cited by"].mean()
 
+st.markdown("""
+<style>
+
+.kpi-card{
+    background: #111827;
+    padding: 25px;
+    border-radius: 18px;
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.35);
+    text-align:center;
+    transition: 0.3s;
+}
+
+.kpi-card:hover{
+    transform: translateY(-5px);
+    border: 1px solid rgba(255,255,255,0.20);
+}
+
+.kpi-icon{
+    font-size:32px;
+    margin-bottom:10px;
+}
+
+.kpi-title{
+    font-size:16px;
+    color:#B8C1CC;
+    margin-bottom:10px;
+}
+
+.kpi-value{
+    font-size:42px;
+    font-weight:700;
+    color:white;
+}
+
+.blue{
+    border-left:5px solid #3B82F6;
+}
+
+.green{
+    border-left:5px solid #10B981;
+}
+
+.yellow{
+    border-left:5px solid #FACC15;
+}
+
+.red{
+    border-left:5px solid #EF4444;
+}
+
+</style>
+""", unsafe_allow_html=True)
+
 c1, c2, c3, c4 = st.columns(4)
 
-c1.metric("📄 Publicaciones", total_publicaciones)
-c2.metric("📚 Revistas", total_revistas)
-c3.metric("⭐ Promedio Citaciones", round(promedio_citas, 2))
-c4.metric("📈 Total Citaciones", int(total_citas))
+with c1:
+    st.markdown(f"""
+    <div class="kpi-card blue">
+        <div class="kpi-icon">📄</div>
+        <div class="kpi-title">Publicaciones</div>
+        <div class="kpi-value">{total_publicaciones}</div>
+    </div>
+    """, unsafe_allow_html=True)
 
+with c2:
+    st.markdown(f"""
+    <div class="kpi-card green">
+        <div class="kpi-icon">📚</div>
+        <div class="kpi-title">Revistas</div>
+        <div class="kpi-value">{total_revistas}</div>
+    </div>
+    """, unsafe_allow_html=True)
+
+with c3:
+    st.markdown(f"""
+    <div class="kpi-card yellow">
+        <div class="kpi-icon">⭐</div>
+        <div class="kpi-title">Promedio Citaciones</div>
+        <div class="kpi-value">{promedio_citas:.2f}</div>
+    </div>
+    """, unsafe_allow_html=True)
+
+with c4:
+    st.markdown(f"""
+    <div class="kpi-card red">
+        <div class="kpi-icon">📈</div>
+        <div class="kpi-title">Total Citaciones</div>
+        <div class="kpi-value">{int(total_citas)}</div>
+    </div>
+    """, unsafe_allow_html=True)
+
+st.markdown("<br>", unsafe_allow_html=True)
 st.divider()
-
 # --------------------------------------------------
 # PUBLICACIONES POR AÑO
 # --------------------------------------------------
