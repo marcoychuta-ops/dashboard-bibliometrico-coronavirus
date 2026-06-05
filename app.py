@@ -329,26 +329,23 @@ use_container_width=True
 # TOP ARTÍCULOS MÁS CITADOS
 
 # --------------------------------------------------
-
-top_cited = (
-filtered_df.sort_values(
-by="Cited by",
-ascending=False
-)
-.head(10)
-)
-
 fig_cited = px.bar(
-top_cited,
-x="Cited by",
-y="Title",
-orientation="h",
-title="Top 10 Artículos Más Citados"
+    top_cited,
+    x="Cited by",
+    y="Title",
+    orientation="h",
+    title="🏆 Top 10 Artículos Más Citados",
+    color="Cited by",
+    color_continuous_scale="Turbo"
+)
+
+fig_cited.update_yaxes(
+    autorange="reversed"
 )
 
 st.plotly_chart(
-fig_cited,
-use_container_width=True
+    fig_cited,
+    use_container_width=True
 )
 
 # --------------------------------------------------
