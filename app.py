@@ -267,4 +267,3 @@ st.download_button(
     "bibliometria_filtrada.csv",
     "text/csv"
 )
-```
