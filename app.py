@@ -147,14 +147,14 @@ fig_year.update_traces(
 
 fig_year.update_layout(
     height=500,
-    title_font=dict(size=24),
+    title_font=dict(size=36),
     xaxis=dict(
-        title_font=dict(size=18),
-        tickfont=dict(size=16)
+        title_font=dict(size=36),
+        tickfont=dict(size=32)
     ),
     yaxis=dict(
-        title_font=dict(size=18),
-        tickfont=dict(size=16)
+        title_font=dict(size=36),
+        tickfont=dict(size=32)
     )
 )
 
