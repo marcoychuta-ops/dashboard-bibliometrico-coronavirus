@@ -271,4 +271,3 @@ st.dataframe(
     height=600,
     hide_index=True
 )
-```
