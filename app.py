@@ -48,13 +48,13 @@ h1{
 # CARGA DE DATOS
 
 # --------------------------------------------------
-
 @st.cache_data
 def load_data():
-df = pd.read_csv("coronavirus_detection.csv")
-return df
+    df = pd.read_csv("coronavirus_detection.csv")
+    return df
 
 df = load_data()
+
 
 # --------------------------------------------------
 
