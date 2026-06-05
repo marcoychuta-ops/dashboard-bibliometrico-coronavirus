@@ -146,31 +146,22 @@ st.plotly_chart(fig_year, use_container_width=True)
 # TOP REVISTAS
 # --------------------------------------------------
 
-
-col1, col2 = st.columns(2)
-
-top_sources = (
-    filtered_df["Source title"]
-    .value_counts()
-    .head(5)
-    .reset_index()
-)
-
-top_sources.columns = ["Revista", "Cantidad"]
-
 fig_sources = px.bar(
     top_sources,
-    x="Revista",      # Categorías en el eje X
-    y="Cantidad",     # Valores en el eje Y
+    x="Revista",
+    y="Cantidad",
     color="Cantidad",
     color_continuous_scale="Viridis",
     title="🏛 Top Revistas"
 )
 
+fig_sources.update_traces(width=0.6)
+
 fig_sources.update_layout(
+    height=600,
     xaxis_title="Revista",
     yaxis_title="Cantidad",
-    xaxis_tickangle=-45  # Inclina las etiquetas para que se lean mejor
+    xaxis_tickangle=-45
 )
 
 col1.plotly_chart(
