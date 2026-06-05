@@ -110,29 +110,29 @@ sorted(df["Publication Stage"].dropna().unique())
 # --------------------------------------------------
 
 filtered_df = df[
-(df["Year"] >= year_range[0]) &
-(df["Year"] <= year_range[1])
+    (df["Year"] >= year_range[0]) &
+    (df["Year"] <= year_range[1])
 ]
 
 if source_filter:
-filtered_df = filtered_df[
-filtered_df["Source title"].isin(source_filter)
-]
+    filtered_df = filtered_df[
+        filtered_df["Source title"].isin(source_filter)
+    ]
 
 if document_filter:
-filtered_df = filtered_df[
-filtered_df["Document Type"].isin(document_filter)
-]
+    filtered_df = filtered_df[
+        filtered_df["Document Type"].isin(document_filter)
+    ]
 
 if open_access_filter:
-filtered_df = filtered_df[
-filtered_df["Open Access"].isin(open_access_filter)
-]
+    filtered_df = filtered_df[
+        filtered_df["Open Access"].isin(open_access_filter)
+    ]
 
 if stage_filter:
-filtered_df = filtered_df[
-filtered_df["Publication Stage"].isin(stage_filter)
-]
+    filtered_df = filtered_df[
+        filtered_df["Publication Stage"].isin(stage_filter)
+    ]
 
 # --------------------------------------------------
 
