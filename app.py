@@ -140,6 +140,24 @@ fig_year = px.line(
     title="📈 Publicaciones por Año"
 )
 
+fig_year.update_traces(
+    line=dict(width=5),
+    marker=dict(size=10)
+)
+
+fig_year.update_layout(
+    height=500,
+    title_font=dict(size=24),
+    xaxis=dict(
+        title_font=dict(size=18),
+        tickfont=dict(size=16)
+    ),
+    yaxis=dict(
+        title_font=dict(size=18),
+        tickfont=dict(size=16)
+    )
+)
+
 st.plotly_chart(fig_year, use_container_width=True)
 
 # --------------------------------------------------
