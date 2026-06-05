@@ -185,7 +185,7 @@ col1.plotly_chart(
 # --------------------------------------------------
 
 authors = (
-    filtered_df["Author full names"]
+    filtered_df["Authors"]
     .dropna()
     .str.split(";")
     .explode()
