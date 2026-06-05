@@ -21,7 +21,7 @@ st.markdown("""
 <style>
 
 .stApp {
-    background-color: white;
+    background-color: #0E1117;
 }
 
 [data-testid="metric-container"]{
