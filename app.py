@@ -329,6 +329,15 @@ use_container_width=True
 # TOP ARTÍCULOS MÁS CITADOS
 
 # --------------------------------------------------
+
+top_cited = (
+    filtered_df.sort_values(
+        by="Cited by",
+        ascending=False
+    )
+    .head(10)
+)
+
 fig_cited = px.bar(
     top_cited,
     x="Cited by",
@@ -347,8 +356,7 @@ st.plotly_chart(
     fig_cited,
     use_container_width=True
 )
-
-# --------------------------------------------------
+# -------------------------------------------------
 
 # REGISTRO BIBLIOGRÁFICO
 
