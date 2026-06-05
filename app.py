@@ -412,6 +412,54 @@ st.plotly_chart(
     use_container_width=True
 )
 
+
+# --------------------------------------------------
+# TIPO DE DOCUMENTOS
+# --------------------------------------------------
+
+
+
+doc_type = (
+    filtered_df["Document Type"]
+    .value_counts()
+    .reset_index()
+)
+
+doc_type.columns = ["Tipo", "Cantidad"]
+
+fig_doc = px.pie(
+    doc_type,
+    names="Tipo",
+    values="Cantidad",
+    hole=0.55,   # Dona
+    title="📑 Distribución por Tipo de Documento"
+)
+
+fig_doc.update_traces(
+    textposition="inside",
+    textinfo="percent+label"
+)
+
+fig_doc.update_layout(
+    height=600,
+    title=dict(
+        x=0.5,
+        font=dict(size=28)
+    ),
+    legend=dict(
+        font=dict(size=14)
+    ),
+    paper_bgcolor="rgba(0,0,0,0)",
+    plot_bgcolor="rgba(0,0,0,0)"
+)
+
+st.plotly_chart(
+    fig_doc,
+    use_container_width=True
+)
+
+
+
 # --------------------------------------------------
 # TABLA
 # --------------------------------------------------
