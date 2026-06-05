@@ -98,6 +98,31 @@ if document_filter:
         filtered_df["Document Type"].isin(document_filter)
     ]
 
+
+# Obtener autores únicos
+autores = (
+    filtered_df["Authors"]
+    .dropna()
+    .str.split(",")
+    .explode()
+    .str.strip()
+    .unique()
+)
+
+autor_seleccionado = st.sidebar.selectbox(
+    "👨‍🔬 Autor",
+    ["Todos"] + sorted(autores)
+)
+
+if autor_seleccionado != "Todos":
+    filtered_df = filtered_df[
+        filtered_df["Authors"]
+        .str.contains(
+            autor_seleccionado,
+            case=False,
+            na=False
+        )
+    ]
 # --------------------------------------------------
 # TÍTULO
 # --------------------------------------------------
