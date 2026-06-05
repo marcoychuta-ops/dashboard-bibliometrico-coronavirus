@@ -2,6 +2,7 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+import plotly.graph_objects as go
 
 # --------------------------------------------------
 # CONFIGURACIÓN
@@ -126,65 +127,96 @@ st.divider()
 # PUBLICACIONES POR AÑO
 # --------------------------------------------------
 
+import pandas as pd
+import plotly.graph_objects as go
+
+# Publicaciones por año
 pub_year = (
     filtered_df.groupby("Year")
     .size()
     .reset_index(name="Publicaciones")
-    .sort_values("Year")
 )
 
-fig_year = px.line(
-    pub_year,
-    x="Year",
-    y="Publicaciones",
-    markers=True,
-    title="📈 Publicaciones por Año"
+# Completar años faltantes
+all_years = pd.DataFrame({
+    "Year": range(
+        int(pub_year["Year"].min()),
+        int(pub_year["Year"].max()) + 1
+    )
+})
+
+pub_year = (
+    all_years
+    .merge(pub_year, on="Year", how="left")
+    .fillna(0)
 )
 
-fig_year.update_traces(
-    line=dict(
-        color="#FF4B4B",
-        width=6
-    ),
-    marker=dict(
-        size=14,
-        color="#FF4B4B",
+pub_year["Publicaciones"] = pub_year["Publicaciones"].astype(int)
+
+# Figura
+fig_year = go.Figure()
+
+# Barras
+fig_year.add_trace(
+    go.Bar(
+        x=pub_year["Year"],
+        y=pub_year["Publicaciones"],
+        name="Publicaciones",
+        opacity=0.75
+    )
+)
+
+# Línea
+fig_year.add_trace(
+    go.Scatter(
+        x=pub_year["Year"],
+        y=pub_year["Publicaciones"],
+        mode="lines+markers",
+        name="Tendencia",
         line=dict(
-            color="white",
-            width=2
+            color="#FF4B4B",
+            width=5
+        ),
+        marker=dict(
+            size=10,
+            color="#FF4B4B",
+            line=dict(
+                color="white",
+                width=2
+            )
         )
     )
 )
 
+# Diseño
 fig_year.update_layout(
-    height=600,
-
-    title=dict(
-        text="📈 Publicaciones por Año",
-        x=0.5,
-        font=dict(size=36)
-    ),
-
+    title={
+        "text": "📈 Evolución de Publicaciones por Año",
+        "x": 0.5,
+        "font": {"size": 28}
+    },
+    height=650,
     xaxis=dict(
         title="Año",
-        title_font=dict(size=24),
-        tickfont=dict(size=18),
-        showgrid=True,
-        gridcolor="rgba(255,255,255,0.1)"
+        dtick=1,
+        tickangle=-45,
+        title_font=dict(size=20),
+        tickfont=dict(size=14)
     ),
-
     yaxis=dict(
-        title="N° de Publicaciones",
-        title_font=dict(size=24),
-        tickfont=dict(size=18),
-        showgrid=True,
-        gridcolor="rgba(255,255,255,0.1)"
+        title="Número de Publicaciones",
+        title_font=dict(size=20),
+        tickfont=dict(size=14)
     ),
-
+    hovermode="x unified",
     plot_bgcolor="rgba(0,0,0,0)",
     paper_bgcolor="rgba(0,0,0,0)",
-
-    hovermode="x unified"
+    legend=dict(
+        orientation="h",
+        y=1.05,
+        x=0.5,
+        xanchor="center"
+    )
 )
 
 st.plotly_chart(
