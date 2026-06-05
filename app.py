@@ -103,7 +103,7 @@ if document_filter:
 autores = (
     filtered_df["Authors"]
     .dropna()
-    .str.split(",")
+    .str.split(";")
     .explode()
     .str.strip()
     .unique()
