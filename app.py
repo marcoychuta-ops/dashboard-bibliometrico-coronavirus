@@ -152,7 +152,7 @@ col1, col2 = st.columns(2)
 top_sources = (
     filtered_df["Source title"]
     .value_counts()
-    .head(10)
+    .head(5)
     .reset_index()
 )
 
@@ -164,7 +164,7 @@ fig_sources = px.bar(
     y="Cantidad",     # Valores en el eje Y
     color="Cantidad",
     color_continuous_scale="Viridis",
-    title="🏛 Top 10 Revistas"
+    title="🏛 Top Revistas"
 )
 
 fig_sources.update_layout(
